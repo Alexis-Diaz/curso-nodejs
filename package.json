@@ -1,0 +1,19 @@
+{
+  "name": "curso_de_reactjs",
+  "version": "1.0.0",
+  "description": "Curso Node js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexis-Diaz/curso-nodejs.git"
+  },
+  "author": "Alexis Diaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexis-Diaz/curso-nodejs/issues"
+  },
+  "homepage": "https://github.com/Alexis-Diaz/curso-nodejs#readme"
+}
