@@ -1,11 +1,10 @@
 import express from 'express'
 import path from 'path'
 
-import homeRouter from './routes/home.js'//es necesario poner el tipo de arachivo para que funcione
+import homeRouter from './routes/home.js'//es necesario poner el tipo de archivo para que funcione
 import aboutRouter from './routes/about.js'
 import blogRouter from './routes/blog.js'
 import contactRouter from './routes/contact.js'
-
 
 const server = express();
 server.use(express.static(path.join(process.cwd(),'public')));

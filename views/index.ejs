@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/uikit.min.css">
-    <script src="/public/js/uikit.min.js"></script>
-    <title><%= path %> </title>
-</head>
-<body>
-    <div class="uk-cover-container uk-height-medium">
-        <img src="img/header.svg" alt="" uk-cover>
-        <nav class="uk-navbar-container" uk-navbar>
-            <div class="uk-navbar-left">
-                <a class="uk-navbar-item uk-logo" href="home"><img src="img/logo.svg"></a>
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/">Home</a></li>
-                    <li><a href="about">About</a></li>
-                    <li><a href="blog">Blog</a></li>
-                    <li><a href="contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-   <h1>Pagina principal</h1>
-    <!-- <% [1,2,3,4,5].forEach((i) => { %> 
-        <h1><%= i %></h1>
-    <% }) %>   -->
-    
-</body>
+<%- include('./include/head.ejs') %> 
 
+<body>
+    <%- include('./include/navbar.ejs') %> <!--el menos indica que se esta insertando bloque para la vista-->
+      <section class="uk-text-center" uk-grid>
+        <div class="uk-width-1-2@m">
+          <h1 class="uk-heading-small header-text">Dreams of unique ideas
+            and embrace them.</h1>
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+    
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+        </div>
+        <div class="uk-width-1-2@m profile-section">
+          <img src="img/low-bg.png" />
+        </div>
+    
+      </section>
+    
+      <div class="uk-container">
+        <div class="uk-card uk-card-default uk-card-body">
+        </div>
+      </div>
+    </body>
 </html>

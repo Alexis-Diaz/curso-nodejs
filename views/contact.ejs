@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/uikit.min.css">
-    <script src="/public/js/uikit.min.js"></script>
-    <title><%= path %> </title>
-</head>
+  <%- include('./include/head.ejs') %> 
+  
 <body>
     <div class="uk-cover-container uk-height-medium">
         <img src="img/header.svg" alt="" uk-cover>
@@ -22,6 +17,29 @@
             </div>
         </nav>
     </div>
-    <h1>contactos</h1>
+
+    <div class="uk-container">
+        <div class="uk-card uk-card-default uk-card-body">
+          <form method="POST" action="contact">
+            <fieldset class="uk-fieldset">
+              <legend class="uk-legend">Primer Nombre</legend><!--El legende es equivalente a label-->
+              <div class="uk-margin">
+                <input class="uk-input" name="primerNombre" type="text" placeholder="Input"><!--El cuadro que recibe el texto-->
+              </div>
+              <legend class="uk-legend">Segundo Nombre</legend>
+              <div class="uk-margin">
+                <input class="uk-input" name="segundoNombre" type="text" placeholder="Input">
+              </div>
+              <legend class="uk-legend">Message</legend>
+              <div class="uk-margin">
+                <textarea class="uk-textarea" rows="5" placeholder="Textarea" name="Mensaje"></textarea>
+              </div>
+              <div class="uk-margin">
+                <button type="submit" class="uk-button uk-button-primary">Enviar</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
 </body>
 </html>
