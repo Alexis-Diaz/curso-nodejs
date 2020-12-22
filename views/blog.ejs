@@ -1,33 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./include/head.ejs') %> 
-    
-<body>
-    <div class="uk-cover-container uk-height-medium">
-        <img src="img/header.svg" alt="" uk-cover>
-        <nav class="uk-navbar-container" uk-navbar>
-            <div class="uk-navbar-left">
-                <a class="uk-navbar-item uk-logo" href="home"><img src="img/logo.svg"></a>
-                <ul class="uk-navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="about">About</a></li>
-                    <li class="uk-active"><a href="blog">Blog</a></li>
-                    <li><a href="contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-
-    <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-       <% posts.forEach(p => {%> 
-        <div>
-            <div class="uk-card uk-card-default uk-card-body">
-                <h1><%= p.titulo %> </h1>
-                <%= p.body %> 
-                <%= p.time %> 
-            </div>
+  
+<%- include('./include/head.ejs') %> 
+  <body>
+    <%- include('./include/navbar.ejs') %> 
+      <div class="uk-container">
+        <button><a href="/blog/new-post">New Post</a></button>
+        <div class="uk-grid-match uk-grid-small" uk-grid>
+          
+            <% posts.forEach( p => { %> 
+              <%- include('./include/blog/post', {post:p}) %>  <!--se pasa p como parametro--> 
+            <% }); %> 
         </div>
-    <% }); %> 
-    </div>
-</body>
+      </div>
+  </body>
 </html>

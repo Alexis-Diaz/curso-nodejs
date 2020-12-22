@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./include/head.ejs') %> 
-
-<body>
-    <%- include('./include/navbar.ejs') %> <!--el menos indica que se esta insertando bloque para la vista-->
+  <body>
+      <%- include('./include/navbar.ejs') %> <!--el menos indica que se esta insertando bloque para la vista-->
+    <div class="uk-container">
       <section class="uk-text-center" uk-grid>
         <div class="uk-width-1-2@m">
           <h1 class="uk-heading-small header-text">Dreams of unique ideas
@@ -16,15 +16,27 @@
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
             tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
         </div>
-        <div class="uk-width-1-2@m profile-section">
-          <img src="img/low-bg.png" />
-        </div>
+       
+        <!-- <div class="uk-width-1-2@m offset">
+          <img data-src="img/img01.jpg" width="200" data-height alt="" uk-img>
+        </div> -->
+        <div class="uk-width-1-2@m uk-position-center-right offset">
+          <img data-src="img/img01.jpg" width="200" data-height alt="" uk-img>
+      </div>
     
       </section>
-    
-      <div class="uk-container">
-        <div class="uk-card uk-card-default uk-card-body">
+      <div class="uk-card uk-card-default" uk-grid>
+        <div class="uk-width-1-2@m">
+          <h1 class="uk-card-title">Latest Posts</h1>
+        </div>
+        <div class="uk-width-1-2@m">
+          <button class="uk-button button-primary uk-position-top-right">All</button>
+        </div>
+        <div class="uk-card uk-card-default uk-card-body uk-width-3-3@m">
+          <% post = {title:"Latest", body:"Some post"} %>
+          <%- include('./include/blog/post', post) %>  
         </div>
       </div>
-    </body>
+    </div>    
+  </body>
 </html>
