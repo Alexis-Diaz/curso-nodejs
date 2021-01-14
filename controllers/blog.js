@@ -7,10 +7,13 @@ export const renderBlog = (req, res) => {
 }
 
 export const renderNewPost = (req, res) => {
+    const cookie = req.get('Cookie')//esta linea sirve para requerir la cookie cuando peticione la vista nuevo post y saber quien es
+    console.log(typeof(cookie))
     res.render('new-post.ejs', {path:"New Post"});
 } 
 
 export const newPost = (req,res) => {
+    
     const postRecibido = new Post({date: req.body.date, title: req.body.title, body: req.body.body})//se crea una instancia del modelo creado
     postRecibido.save((err)=>{
         res.redirect('/blog');//redirecciona a la pagina indicada
