@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./include/head.ejs') %> 
+    <body>
+        <%- include('./include/navbar.ejs') %> 
+
+        <% if (errorMessage.message != "sin_error" ){%>
+            <div class=<%-errorMessage.alert %>  uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p><%- errorMessage.message %> </p>
+            </div>
+        <% } %>
+       
+        <div class="uk-container">
+            <div class="uk-card uk-card-default uk-card-body">
+                <h1 class="uk-heading-small uk-center-top">Create an account</h1>
+                <form method="POST" action="../auth/registration"> <!--la accion es donde la url va a ir--> 
+                <fieldset class="uk-fieldset">
+                    <legend class="uk-legend">Name</legend> <!--El legende es equivalente a label--> 
+                    <div class="uk-margin">
+                        <!--el name debe coincidir con el json enviado-->
+                    <input class="uk-input" name="fullname" type="text" placeholder="Enter your name"> <!--El cuadro que recibe el texto-->
+                    </div>
+                    <legend class="uk-legend">Email</legend>
+                    <div class="uk-margin">
+                    <input class="uk-input" type="email" placeholder="Enter your email" name="email">
+                    </div>
+                    <legend class="uk-legend">Password</legend>
+                    <div class="uk-margin">
+                    <input class="uk-input" type="password" placeholder="Enter your password" name="password">
+                    </div>
+                    <div class="uk-margin">
+                    <button type="submit" class="uk-button button-primary">Register</button>
+                    </div>
+                </fieldset>
+                </form>
+                Or
+                <button class="uk-button button-primary"><a style="color: white;" href="/auth/login">Login</a></button>
+            </div>
+        </div>
+    </body>
+</html>

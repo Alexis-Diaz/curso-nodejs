@@ -1,12 +1,14 @@
 import {Post} from '../models/post.js'
 
 export const renderBlog = (req, res) => {
-    Post.find((err, posts) => {
+    Post.find((err, posts) => {//busca todas la collecion de post
         res.render('blog.ejs', {path: "Blog", posts : posts});
     }) 
 }
 
 export const renderNewPost = (req, res) => {
+    const cookie = req.get('Cookie')//esta linea sirve para requerir la cookie cuando peticione la vista nuevo post y saber quien es
+    console.log(typeof(cookie))
     res.render('new-post.ejs', {path:"New Post"});
 } 
 
