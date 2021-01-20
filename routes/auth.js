@@ -7,7 +7,9 @@ router.use(bodyParser.urlencoded({extended:true}));
 
 router.get('/', controller.renderRegister);
 router.get('/login', controller.renderLogin);
+router.get('/login/:error', controller.renderLogin);
 router.get('/registration', controller.renderRegister)
+router.get('/verify', controller.renderHomeEmailVerification)
 
 router.post('/registration', controller.register);
 router.post('/login', controller.login);

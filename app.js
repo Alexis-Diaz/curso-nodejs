@@ -7,6 +7,7 @@ import aboutRouter from './routes/about.js'
 import blogRouter from './routes/blog.js'
 import contactRouter from './routes/contact.js'
 import authRouter from './routes/auth.js'
+import session from 'express-session'//para crear una sesion, parecido a cookie
 
 const result = dotenv.config()//busca un archivo .env vera lo que hay adentro y creara variables de entorno
 if(!result.error){
@@ -18,6 +19,11 @@ if(!result.error){
     // console.log(process.env.DB_URI)
 }
 const server = express();
+
+//crear sesion
+server.use(session({
+    secret:"sd3r4k45h45f"
+}));
 
 server.use(express.static(path.join(process.cwd(),'public')));
 

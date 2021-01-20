@@ -9,7 +9,7 @@
         <div class="uk-grid-match uk-grid-small" uk-grid>
           
             <% posts.forEach( p => { %> 
-              <%- include('./include/blog/post', {post:p}) %>  <!--se pasa p como parametro--> 
+              <%- include('./include/blog/post', {post:p}) %>  <!--se pasa cada post (p) como parametro--> 
             <% }); %> 
         </div>
       </div>

@@ -7,37 +7,37 @@
     <!-- include the navigation partial -->
     <%- include('./include/navbar.ejs') %>
 
-    <% if (errorMessage.message != "sin_error" ){%>
+    <% if (errorMessage.message !== "sin_error" ){%>
       <div class=<%-errorMessage.alert %>  uk-alert>
           <a class="uk-alert-close" uk-close></a>
           <p><%- errorMessage.message %> </p>
       </div>
     <% } %>
-    
-      <div class="uk-container">
-        <div class="uk-card uk-card-default uk-card-body">
-          <h1 class="uk-heading-small uk-center-top">Login</h1>
-          <form method="POST" action="login">
-            <fieldset class="uk-fieldset">
-              <legend class="uk-legend">Email</legend>
-              <div class="uk-margin">
-                <input class="uk-input" name="email" type="email" rows="5" placeholder="Enter your email">
-              </div>
-              <legend class="uk-legend">Password</legend>
-              <div class="uk-margin">
-                <input class="uk-input" name="password" type="password" rows="5" placeholder="Enter your Password">
-              </div>
 
-              <div class="uk-margin">
-                <button type="submit" class="uk-button  button-primary">Login</button>
-              </div>
-            </fieldset>
-          </form>
-          Or 
-          <button class="uk-button  button-primary"><a style="color: white;" href="/auth/registration">Register</a></button>
-        </div>
+    <div class="uk-container">
+      <div class="uk-card uk-card-default uk-card-body">
+        <h1 class="uk-heading-small uk-center-top">Login</h1>
+        <form method="POST" action="/auth/login">
+          <fieldset class="uk-fieldset">
+            <legend class="uk-legend">Email</legend>
+            <div class="uk-margin">
+              <input class="uk-input" name="email" type="email" rows="5" placeholder="Enter your email">
+            </div>
+            <legend class="uk-legend">Password</legend>
+            <div class="uk-margin">
+              <input class="uk-input" name="password" type="current-password" rows="5" placeholder="Enter your Password">
+            </div>
 
+            <div class="uk-margin">
+              <button type="submit" class="uk-button  button-primary">Login</button>
+            </div>
+          </fieldset>
+        </form>
+        Or 
+        <button class="uk-button  button-primary"><a style="color: white;" href="/auth/registration">Register</a></button>
       </div>
+    </div>
+
   </body>
 
 </html>

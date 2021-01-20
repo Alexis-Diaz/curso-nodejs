@@ -38,8 +38,8 @@ userSchema.statics.findByEmailAndComparePassword = function(email, textPassword)
     return new Promise ((resolve, reject) => {
         this.findOne({email:email})//findOne sirve para buscar una coincidencia usando el objeto pasado en la coleccion de la BD de mongo
             .then((user) =>{
-                bcrypt.compare(textPassword, user.password)
-                .then(isValid => {
+                bcrypt.compare(textPassword, user.password)//Bcrypt regresa un boleano en caso de ser iguales true o diferentes false
+                .then(isValid => {//isValid es la variable que almacena la respuesta de bcrypt
                 resolve({isValid:isValid, user:user});
                 })
                 .catch(err => {
@@ -52,5 +52,5 @@ userSchema.statics.findByEmailAndComparePassword = function(email, textPassword)
     });
 };
 
-                                   //User indica que coleccion se debe usar
+                                   //User indica que coleccion se debe usar. Mongoose automaticamente crea la coleccion en plural
 export const User = mongoose.model('User', userSchema)

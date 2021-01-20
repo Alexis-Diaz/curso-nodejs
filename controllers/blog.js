@@ -1,7 +1,7 @@
 import {Post} from '../models/post.js'
 
 export const renderBlog = (req, res) => {
-    Post.find((err, posts) => {
+    Post.find((err, posts) => {//busca todas la collecion de post
         res.render('blog.ejs', {path: "Blog", posts : posts});
     }) 
 }
@@ -13,7 +13,6 @@ export const renderNewPost = (req, res) => {
 } 
 
 export const newPost = (req,res) => {
-    
     const postRecibido = new Post({date: req.body.date, title: req.body.title, body: req.body.body})//se crea una instancia del modelo creado
     postRecibido.save((err)=>{
         res.redirect('/blog');//redirecciona a la pagina indicada

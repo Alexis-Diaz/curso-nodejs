@@ -1,15 +1,24 @@
 import {User} from '../models/user.js'
 import bcrypt from 'bcrypt'//este paquete se usa para hashear la contraseña
 import {sendVerificatioEmail} from '../services/mailer.js'
+import {verify} from '../services/token.js'
+import expressSession from 'express-session'
 //las funciones render sirven para servir la vista silicitada
 export const renderRegister = (req, res)=>{
     res.render("registration.ejs", {path:"Registration", errorMessage: {message:"sin_error"}});
 }
 
 export const renderLogin = (req, res)=>{
-                //nombre cabecera, pasando cualquier valor
+  //primero se verifica si existe un parametro de ruta, en caso de haber significa que alguien quiere hacer un post sin estar logueado.
+    if (!req.params.error){
+          //nombre cabecera, pasando cualquier valor
     res.setHeader('Set-Cookie', 'logedIn=true')//para crear una cokie y enviarla en la cabecera
     res.render("login.ejs", {path:"Login", errorMessage:{message:"sin_error"}});
+    }else{
+          //nombre cabecera, pasando cualquier valor
+    res.setHeader('Set-Cookie', 'logedIn=true')//para crear una cokie y enviarla en la cabecera
+    res.render("login.ejs", {path:"Login", errorMessage:{message:"Por favor inicia sesion o crea una cuenta para escribir un post", alert: "uk-alert-danger"}});
+    }
 }
 
 //Esta funcion sirve para hashear el pasword. Hash es diferente a encriptar
@@ -36,11 +45,19 @@ export const register = (req, res) => {
     const [firstName, lastName] = fullname.split(' ');
     hashPassword(password, res, (hash) => {
         const newUser = new User({firstName:firstName, lastName:lastName, email:email, password:hash})
-        newUser.save()
+        newUser.save()//aqui se guarda el usuario
         .then((user) => {
-            console.log("entro en el then de save user")
-            sendVerificatioEmail(user)
-            return res.redirect('/');
+            req.session.userId = user._id// a la session se le pega el idUsuario
+            console.log(req.session + "session creada con id")
+            req.session.save(err=>{
+                if(!err){
+                    console.log("entro en el then de save user")
+                    sendVerificatioEmail(user)
+                    res.render("registration.ejs", {path:"Registration", errorMessage: {message: "Por favor, revisa tu correo y confirma con el enlacer verificación", alert: "uk-alert-primary"}})
+                }
+            });
+           
+            //return res.redirect('/');
             //res.render("registration.ejs", {path:"Registration", errorMessage: {message:"User created successfully", alert:"uk-alert-success"}})
             //res.end();
         })
@@ -64,6 +81,7 @@ export const login = (req, res) => {
     User.findByEmailAndComparePassword(email, password)
     .then(({isValid, user}) => {
         if(isValid){
+            req.session.userId = user._id// cuando se inicia session a la session se le pega el idUsuario
             res.redirect('/')
         }
     })
@@ -85,4 +103,24 @@ export const login = (req, res) => {
     //     }
     // })
 }
-export default {renderRegister, renderLogin, register, login}
+
+//esta funcion sirve para verificar el token por medio del enlace enviado al correo del usuario
+export const renderHomeEmailVerification = (req, res) => {//se ha usado query params para estraer el valor del token se usa req.query.nombreDelParametro
+    const userVerification = verify(req.query.token)
+    if(userVerification.valid === false && userVerification.key === null){
+        res.render("registration.ejs", {path:"Registration", errorMessage: {message: "Token invalid", alert: "uk-alert-danger"}})
+    }else{
+        User.findById(userVerification.key, (err, users) =>{
+            console.log(users)
+            User.updateOne({_id:users._id},{emailVerified:true})
+            .then(
+                console.log("USUARIO ACTUALIZADO"),
+                res.render("index.ejs", {path:"Home"})
+            )
+            .catch( error =>{
+                console.log("algo anda mal " + error)
+            })
+        })
+    }
+}
+export default {renderRegister, renderLogin, register, login, renderHomeEmailVerification}
